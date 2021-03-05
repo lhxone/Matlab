@@ -1,11 +1,15 @@
 format long;
-t = 0;
+t = 9e7;
 d = 1;
 
-while d >= 1e-8
-    t = t + 100000;
+while d >= 1e-10
+    if d<=1e-9
+        t = t + 100;
+    else
+        t = t + 100000;
+    end
     mypi = sqrt(6 * EulerSum(t))
-    d = abs(pi - mypi);
+    d = abs(pi - mypi)
 end
 
 t
