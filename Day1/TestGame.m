@@ -16,3 +16,6 @@ while t>0
         fprintf("还剩%d次机会，请再次输入：",t);
     end
 end
+if t==0
+    fprintf("机会为0，游戏结束!\n");
+end
