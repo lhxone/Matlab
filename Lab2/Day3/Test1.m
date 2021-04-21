@@ -20,4 +20,4 @@ for index = 1:numel(x4)
     y4(index) = sin(x4(index)) + log(x4(index));
 end
 
-plot(x1, y1, 'r*', x2, y2, 'bd', x3, y3, 'gH', x4, y4, 'y^')
+plot(x1, y1, x2, y2, x3, y3', x4, y4)
