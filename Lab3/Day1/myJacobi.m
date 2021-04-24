@@ -43,10 +43,10 @@ function x = myJacobi(A, b, X0, mytol)
         x = B * X0 + f;
         n = n + 1;
 
-        if (n >= 200)
-            disp('Warning:迭代次数太多,可能不收敛!')
-            return;
-        end
+        % if (n >= 200)
+        %     disp('Warning:迭代次数太多,可能不收敛!')
+        %     return;
+        % end
 
     end
 
