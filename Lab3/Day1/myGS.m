@@ -1,5 +1,9 @@
-function x = myJacobi(A, b, X0, mytol)
+function x = myGS(A, b, X0, mytol)
 
+    % A为系数矩阵.
+    % b为右端常向量.
+    % X0为初始层，默认取0.
+    % mytol表示允许误差, 要求默认值为1e-6.
     % A为系数矩阵.
     % b为右端常向量.
     % X0为初始层，默认取0.
@@ -48,29 +52,21 @@ function x = myJacobi(A, b, X0, mytol)
         return
     end
 
-    D = diag(diag(A)); % 求A的对角矩阵
-    L = -tril(A, -1); % 求A的下三角矩阵
-    U = -triu(A, 1); % 求A的上三角矩阵
-    B = D \ (L + U); % Jacobi迭代矩阵
+    %将矩阵分裂为A=D-L-U
+    D = diag(diag(A));
+    L = -tril(A, -1); %下三角
+    U = -triu(A, 1); %上三角
 
-    e = abs(eig(B)); % 求特征值，判断是否收敛
+    g = (D - L) \ b;
+    B = (D - L) \ U;
 
-    if e > 1
-        disp('不收敛')
-        x = zeros(A_row, 1);
-        return;
-    end
+    % TODO:判断收敛
 
-    f = D \ b;
-    x = B .* X0 + f;
-    n = 1; % 迭代次数
+    x = B * X0 + g;
 
-    while norm(x - X0) >= mytol % 进行迭代
+    while norm(x - X0) >= mytol
         X0 = x;
-        x = B * X0 + f;
-        n = n + 1;
-
+        x = B * X0 + g;
     end
 
-    x = x(:, 1);
 end
